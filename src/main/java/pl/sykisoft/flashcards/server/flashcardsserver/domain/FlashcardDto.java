@@ -1,22 +1,12 @@
-package pl.sykisoft.flashcards.server.flashcardsserver.model;
+package pl.sykisoft.flashcards.server.flashcardsserver.domain;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+public class FlashcardDto {
 
-@Entity
-public class FlashCard {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
-    @NotBlank
-    @Size(min = 3, max = 100)
     private String title;
-
-    @Column(columnDefinition = "text")
     private String description;
+    private int flashcards;
+    private int knowsFlashcards;
 
     public Long getId() {
         return id;
@@ -40,5 +30,21 @@ public class FlashCard {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public int getFlashcards() {
+        return flashcards;
+    }
+
+    public void setFlashcards(int flashcards) {
+        this.flashcards = flashcards;
+    }
+
+    public int getKnowsFlashcards() {
+        return knowsFlashcards;
+    }
+
+    public void setKnowsFlashcards(int knowsFlashcards) {
+        this.knowsFlashcards = knowsFlashcards;
     }
 }
