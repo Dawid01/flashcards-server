@@ -55,6 +55,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable().authorizeRequests()
                 .antMatchers("/registration").permitAll()
                 .antMatchers("/flashcards").hasAuthority("USER")
+                .antMatchers("/flashcardsitems").hasAuthority("USER")
                 .and().httpBasic();
 
     }

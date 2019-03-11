@@ -3,6 +3,7 @@ package pl.sykisoft.flashcards.server.flashcardsserver.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Entity
 public class Flashcard {
@@ -23,6 +24,9 @@ public class Flashcard {
 
     private int flashcards;
     private int knowsFlashcards;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "flashcard")
+    private List<FlashcardItem> flashcardsItem;
 
     public Long getId() {
         return id;
