@@ -6,8 +6,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import pl.sykisoft.flashcards.server.flashcardsserver.model.Flashcard;
+import pl.sykisoft.flashcards.server.flashcardsserver.model.FlashcardItem;
 import pl.sykisoft.flashcards.server.flashcardsserver.model.User;
 import pl.sykisoft.flashcards.server.flashcardsserver.repository.FlashCardRepository;
+import pl.sykisoft.flashcards.server.flashcardsserver.repository.FlashcardItemRepository;
 import pl.sykisoft.flashcards.server.flashcardsserver.repository.UserRepository;
 
 import java.util.ArrayList;
@@ -21,6 +23,10 @@ public class FlashcardsServerApplication {
 
     @Autowired
     private FlashCardRepository flashCardRepository;
+
+    @Autowired
+    private FlashcardItemRepository flashcardItemRepository;
+
 
     public static void main(String[] args) {
         SpringApplication.run(FlashcardsServerApplication.class, args);
@@ -40,13 +46,13 @@ public class FlashcardsServerApplication {
         user.setEmail("johnrambo@gmail.com");
         user.setName("John Rambo");
         user.setPassword("12345678");
-        User use2 = new User();
-        use2.setEmail("example@gmail.com");
-        use2.setName("example");
-        use2.setPassword("12345678");
+        User user2 = new User();
+        user2.setEmail("example@gmail.com");
+        user2.setName("example");
+        user2.setPassword("12345678");
 
         user = userRepository.save(user);
-        use2 = userRepository.save(use2);
+        user2 = userRepository.save(user2);
 
 
         Flashcard flashcard1 =  new Flashcard();
@@ -61,12 +67,29 @@ public class FlashcardsServerApplication {
         flashcard2.setFlashcards(20);
         flashcard2.setKnowsFlashcards(5);
         flashcard2.setUser(user);
+        Flashcard flashcard3 =  new Flashcard();
+        flashcard3.setTitle("Japan");
+        flashcard3.setDescription("Words to the exam");
+        flashcard3.setFlashcards(20);
+        flashcard3.setKnowsFlashcards(5);
+        flashcard3.setUser(user2);
         List<Flashcard> flashcardList1 = new ArrayList<>();
         flashcardList1.add(flashcard1);
         flashcardList1.add(flashcard2);
         user.setFlashcards(flashcardList1);
         flashCardRepository.save(flashcard1);
         flashCardRepository.save(flashcard2);
+        flashCardRepository.save(flashcard3);
+
+        //FlashcardItem flashcardItem1 = new FlashcardItem("Key", "Klucz", "Don't forgot to take the key!", "Nie zapomnij wziąć klucz!", true, flashcard1);
+        FlashcardItem flashcardItem1 =  new FlashcardItem();
+        flashcardItem1.setFirstWord("Key");
+        flashcardItem1.setSecondWord("Klucz");
+        flashcardItem1.setFirstDescription("Don't forgot to take the key!");
+        flashcardItem1.setSecondDescription("Nie zapomnij wziąć klucz!");
+        flashcardItem1.setFlashcard(flashcard1);
+        flashcardItem1.setKnow(true);
+        flashcardItemRepository.save(flashcardItem1);
 
 
 //        for(int i = 0; i < 10; i++){
